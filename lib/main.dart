@@ -1,7 +1,7 @@
-import 'package:econ_journal/IntroductionPage.dart';
+import 'package:econ_journal/AllArticlesPage.dart';
 import 'package:flutter/material.dart';
 
-import 'Example.dart';
+import 'IntroductionPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Habit Gym",
-      home: Examplpe(),
+      home: IntroductionPage(),
       debugShowCheckedModeBanner: false,
     );;
   }

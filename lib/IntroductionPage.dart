@@ -1,17 +1,19 @@
-import 'package:econ_journal/ArticalPage.dart';
-import 'package:econ_journal/Example.dart';
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:econ_journal/AllArticlesPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'ArticalPage.dart';
 
 class IntroductionPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     return _Display();
   }
-
 }
 
-class _Display extends State<IntroductionPage> {
+class _Display extends State<IntroductionPage>{
   List<String> titles = [
     "The global economy will perform better than many expect in 2024",
     "AI may start to boost US GDP in 2027",
@@ -36,39 +38,135 @@ class _Display extends State<IntroductionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: NestedScrollView(
-          headerSliverBuilder:(context, innerBoxIsScrolled) =>[
-            SliverAppBar(
-              primary: true,
-              backgroundColor: const Color(0xFF08016e),
-              pinned: true,
-              expandedHeight: 150,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset("assets/images/SliverImage.jpeg",fit: BoxFit.cover),
-                title: const Text(
-                  "CWRU Econ Journal",
-                ),
-              ),
-            )
-          ],
-          body: getScaffold(),
-        )
-    );
+    return getScaffold();
   }
 
-  Widget getScaffold() {
+  Widget getScaffold(){
     return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset("assets/images/IntroductionPage.jpeg"),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("About Us",
+                  style:  TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w900
+                  ),),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                          "Building upon the foundation of the Ohio Research Group from Fall 2022, the journal offers training and mentorship opportunities from upperclassmen and professors. It's more than just a publication; it's a hub for collaboration, learning, and growth. The finished product will be distributed publicly, with aspirations of showcasing our students' insights in local media channels",
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Affiliated with Weatherhead School of Management"
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Featured Articles",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 30,
+                    fontStyle: FontStyle.normal,
+                  ),
+                ),
+              ),
+              CarouselSlider(
+                items: List.generate(8, (index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () async {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => ArticalPage()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                child: Image(
+                                  image: AssetImage("assets/images/${index + 1}.jpg"),
+                                  fit: BoxFit.fill,  ),
+                                width: 250,
+                                height: 114,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                titles[index],
+                                style: TextStyle(fontSize: 18, ),
+                              ),
+                            ),
+                            // Text(
+                            //   description[index],
+                            //   style: TextStyle(fontSize: 6),
+                            // )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+                options: CarouselOptions(
+                  autoPlay: true,
+                  enlargeFactor: .25,
+                  enlargeCenterPage: true
+                ),
+              )
+            ],
+          )
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: 1,
+        selectedIndex: 0,
         onDestinationSelected: (int index) {
           switch(index){
             case 0:
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Examplpe()));
+                  MaterialPageRoute(builder: (context) => IntroductionPage()));
             case 1:
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => IntroductionPage()));
+                  MaterialPageRoute(builder: (context) => AllArticlesPage()));
           }
         },
         indicatorColor: Colors.blueAccent,
@@ -89,62 +187,8 @@ class _Display extends State<IntroductionPage> {
           ),
         ],
       ),
-      body: CustomScrollView(
-        physics: ScrollPhysics(),
-        primary: true,
-        slivers: <Widget>[
-          SliverPadding(
-            padding: const EdgeInsets.all(20),
-            sliver: SliverGrid.count(
-              childAspectRatio: .76,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 20,
-              crossAxisCount: 2,
-              children:List.generate(8, (index) {
-                return InkWell(
-                  borderRadius: BorderRadius.circular(10),
-                  onTap: () async {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ArticalPage()));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            child: Image(
-                              image: AssetImage("assets/images/${index + 1}.jpg"),
-                              fit: BoxFit.cover,  ),
-                            width: 200,
-                            height: 100,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            titles[index],
-                            style: TextStyle(fontSize: 18, ),
-                          ),
-                        ),
-                        // Text(
-                        //   description[index],
-                        //   style: TextStyle(fontSize: 6),
-                        // )
-                      ],
-                    ),
-                  ),
-                );
-              }),
-            ),
-          ),
-        ],
-      ),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.blue[600],
     );
   }
+
 }

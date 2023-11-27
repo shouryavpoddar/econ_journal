@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import 'Example.dart';
+import 'IntroductionPage.dart';
 
 class ArticalPage extends StatefulWidget{
   @override
