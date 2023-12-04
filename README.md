@@ -1,16 +1,10 @@
 # econ_journal
 
-A new Flutter project.
+This is the code for the Demo App I made for the Journal Of Econ at CWRU 
 
-## Getting Started
+## About the Code
 
-This project is a starting point for a Flutter application.
+This Application is coded in the programming language Dart, and used the Flutter SDK package to help it run. The advantage of this method of creating the app is that it helps the Application have an identical user interaction regardless of whether they use an Android or IOS device. 
 
-A few resources to get you started if this is your first Flutter project:
+# Pages
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
